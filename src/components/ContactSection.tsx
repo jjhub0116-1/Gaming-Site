@@ -25,7 +25,7 @@ const ContactSection = () => {
                         </p>
 
                         <a
-                            href="https://innovisontech.com/"
+                            href="https://t.me/octpusgaming"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-block"

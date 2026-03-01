@@ -17,7 +17,7 @@ app.get('/api/games', async (req, res) => {
     try {
         const { type } = req.query;
         const filter = type ? { type } : {};
-        const games = await Game.find(filter);
+        const games = await Game.find(filter).sort({ order: 1 });
         res.json(games);
     } catch (err) {
         res.status(500).json({ message: err.message });

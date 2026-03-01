@@ -19,6 +19,10 @@ const gameSchema = new mongoose.Schema({
         required: true,
         enum: ['player', 'agent'],
     },
+    order: {
+        type: Number,
+        required: true,
+    }
 }, { timestamps: true });
 
 const Game = mongoose.model('Game', gameSchema);

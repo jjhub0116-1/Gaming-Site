@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 
-const Industries = () => {
+const SuccessStories = () => {
     return (
         <div className="bg-[#020617] min-h-screen w-full overflow-hidden text-foreground font-body flex flex-col relative items-center justify-center p-4">
             <Navbar />
@@ -46,9 +46,16 @@ const Industries = () => {
                     </p>
 
                     <div className="pt-4 sm:pt-6">
-                        <button className="px-6 sm:px-10 py-3 sm:py-5 bg-primary hover:bg-primary/90 text-white font-display font-black rounded-xl sm:rounded-2xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] active:scale-95 text-base sm:text-lg tracking-widest uppercase outline-none">
-                            Visit Help Center
-                        </button>
+                        <a 
+                            href="https://t.me/octpusgaming" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block"
+                        >
+                            <button className="px-6 sm:px-10 py-3 sm:py-5 bg-primary hover:bg-primary/90 text-white font-display font-black rounded-xl sm:rounded-2xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] active:scale-95 text-base sm:text-lg tracking-widest uppercase outline-none">
+                                Visit Help Center
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -62,4 +69,4 @@ const Industries = () => {
     );
 };
 
-export default Industries;
+export default SuccessStories;

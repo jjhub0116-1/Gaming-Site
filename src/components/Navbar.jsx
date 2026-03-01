@@ -5,13 +5,28 @@ import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "ADVERTISING", href: "/#advertising" },
-  { label: "INDUSTRIES", href: "/industries", hasDropdown: false },
-  { label: "SUCCESS STORIES", href: "/#stories" },
+  { label: "GAME LINKS", href: "/#games", hasDropdown: false },
+  { label: "SUCCESS STORIES", href: "/stories" },
   { label: "FAQ", href: "/faq" },
 ];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleNavClick = (e, href) => {
+    if (href.startsWith("/#")) {
+      const id = href.split("#")[1];
+      if (window.location.pathname === "/") {
+        const element = document.getElementById(id);
+        if (element) {
+          e.preventDefault();
+          element.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
+      }
+    }
+    setMobileOpen(false);
+  };
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 pointer-events-none pt-4 sm:pt-6">
@@ -28,6 +43,7 @@ const Navbar = () => {
             <Link
               key={link.label}
               to={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className={`px-7 py-3 text-[11px] sm:text-[12px] font-black tracking-[0.15em] transition-all duration-300 font-display rounded-[12px] flex items-center gap-1.5 active:scale-95 transform-gpu backdrop-blur-md border border-white/5 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.5)] hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.6)] hover:-translate-y-1 text-white ${link.label === "ADVERTISING"
                 ? "bg-[#172855] border-primary/20 shadow-[0_8px_20px_-4px_rgba(99,102,241,0.2)]"
                 : "bg-[#172855]/90 hover:bg-[#172855]"
@@ -41,7 +57,9 @@ const Navbar = () => {
 
         {/* Login Button - Independent */}
         <a
-          href="#login"
+          href="https://t.me/octpusgaming"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden md:inline-flex px-6 py-2.5 rounded-full bg-white text-black font-display text-xs font-black tracking-widest hover:bg-white/90 transition-all shadow-xl active:scale-95"
         >
           LOG IN
@@ -64,13 +82,18 @@ const Navbar = () => {
                 key={link.label}
                 to={link.href}
                 className="text-sm font-bold tracking-widest text-foreground/80 hover:text-accent font-display py-2"
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
               >
                 {link.label}
               </Link>
             ))}
             <div className="pt-4 border-t border-white/10">
-              <a href="#login" className="flex justify-center px-5 py-3 rounded-xl bg-primary text-white font-display text-sm font-bold tracking-wider">
+              <a 
+                href="https://t.me/octpusgaming" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center px-5 py-3 rounded-xl bg-primary text-white font-display text-sm font-bold tracking-wider"
+              >
                 LOG IN
               </a>
             </div>

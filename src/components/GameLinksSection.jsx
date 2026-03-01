@@ -3,31 +3,30 @@ import { useState, useEffect } from "react";
 const tabs = ["Player Link", "Agent Link"];
 
 // ... existing code ...
-const playerGames = [
-  { _id: "1", name: "Dragon Fire", image: "/src/assets/game-dragon-fire.jpg", link: "#" },
-  { _id: "2", name: "Cyber Race", image: "/src/assets/game-cyberrace.jpg", link: "#" },
-  { _id: "3", name: "Demon Hunter", image: "/src/assets/game-demon-hunter.jpg", link: "#" },
-  { _id: "4", name: "Shadow Ninja", image: "/src/assets/game-shadow-ninja.jpg", link: "#" },
-  { _id: "5", name: "Cosmic Wars", image: "/src/assets/game-cosmic-wars.jpg", link: "#" },
-  { _id: "6", name: "Mystic Forest", image: "/src/assets/game-mystic-forest.jpg", link: "#" },
-  { _id: "7", name: "Samurai Gold", image: "/src/assets/game-samurai.jpg", link: "#" },
-  { _id: "8", name: "Viking Raid", image: "/src/assets/game-viking.jpg", link: "#" },
-];
-
-const agentGames = [
-  { _id: "a1", name: "Atlantis", image: "/src/assets/game-atlantis.jpg", link: "#" },
-  { _id: "a2", name: "Castle Siege", image: "/src/assets/game-castle-siege.jpg", link: "#" },
-  { _id: "a3", name: "Pharaoh", image: "/src/assets/game-pharaoh.jpg", link: "#" },
-  { _id: "a4", name: "Pirate Gold", image: "/src/assets/game-pirate-gold.jpg", link: "#" },
-  { _id: "a5", name: "Elemental", image: "/src/assets/game-elemental.jpg", link: "#" },
-  { _id: "a6", name: "Gladiator", image: "/src/assets/game-gladiator.jpg", link: "#" },
-  { _id: "a7", name: "Zombie War", image: "/src/assets/game-zombie.jpg", link: "#" },
-  { _id: "a8", name: "Dragon Fire", image: "/src/assets/game-dragon-fire.jpg", link: "#" },
-];
+// Game data is now fetched from the API
 
 const GameLinksSection = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const games = activeTab === 0 ? playerGames : agentGames;
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      setLoading(true);
+      try {
+        const type = activeTab === 0 ? "player" : "agent";
+        const response = await fetch(`http://localhost:5000/api/games?type=${type}`);
+        const data = await response.json();
+        setGames(data);
+      } catch (err) {
+        console.error("Error fetching games:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGames();
+  }, [activeTab]);
 
   return (
     <section id="games" className="py-20 bg-gradient-to-b from-[#020617] via-[#0f172a] to-[#020617] min-h-screen relative overflow-hidden">
@@ -61,31 +60,37 @@ const GameLinksSection = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 max-w-7xl mx-auto">
-          {games.map((game) => (
-            <a
-              key={game._id}
-              href={game.link}
-              className="group flex flex-col items-center"
-            >
-              <div className="w-full aspect-square rounded-[32px] overflow-hidden border border-white/10 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-primary/20 relative">
-                <img
-                  src={game.image}
-                  alt={game.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
-                  <span className="text-white font-display text-[10px] tracking-[0.3em] font-black uppercase">Play Now</span>
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 max-w-7xl mx-auto">
+            {games.map((game) => (
+              <a
+                key={game._id}
+                href={game.link}
+                className="group flex flex-col items-center"
+              >
+                <div className="w-full aspect-square rounded-[32px] overflow-hidden border border-white/10 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-primary/20 relative">
+                  <img
+                    src={game.image}
+                    alt={game.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
+                    <span className="text-white font-display text-[10px] tracking-[0.3em] font-black uppercase">Play Now</span>
+                  </div>
                 </div>
-              </div>
-              <span className="mt-5 font-display text-sm sm:text-base font-bold text-white/90 tracking-wide transition-colors group-hover:text-white relative">
-                {game.name}
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary/50 group-hover:w-full transition-all duration-300" />
-              </span>
-            </a>
-          ))}
-        </div>
+                <span className="mt-5 font-display text-sm sm:text-base font-bold text-white/90 tracking-wide transition-colors group-hover:text-white relative">
+                  {game.name}
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary/50 group-hover:w-full transition-all duration-300" />
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

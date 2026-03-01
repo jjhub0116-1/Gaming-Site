@@ -81,9 +81,16 @@ const CommunitySection = () => {
                         </div>
 
                         <div className="pt-6">
-                            <button className="px-10 py-5 bg-white text-black font-display font-black rounded-2xl hover:bg-white/90 transition-all shadow-xl active:scale-95 text-base tracking-widest uppercase flex items-center justify-center lg:justify-start gap-3 mx-auto lg:mx-0">
-                                JOIN COMMUNITY <ArrowRight className="w-5 h-5" />
-                            </button>
+                            <a 
+                                href="https://t.me/octpusgaming" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block"
+                            >
+                                <button className="px-10 py-5 bg-white text-black font-display font-black rounded-2xl hover:bg-white/90 transition-all shadow-xl active:scale-95 text-base tracking-widest uppercase flex items-center justify-center lg:justify-start gap-3 mx-auto lg:mx-0">
+                                    JOIN COMMUNITY <ArrowRight className="w-5 h-5" />
+                                </button>
+                            </a>
                         </div>
                     </div>
 

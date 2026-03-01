@@ -34,7 +34,7 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://t.me/yourtelegram"
+            href="https://t.me/octpusgaming"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-3 px-8 py-4 rounded-xl bg-[#172855] text-white font-display text-base font-bold tracking-wider transition-all duration-300 backdrop-blur-md border border-white/5 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-10px_rgba(34,158,217,0.3)] hover:border-blue-400/30 active:scale-95"
@@ -45,7 +45,7 @@ const HeroSection = () => {
           </a>
 
           <a
-            href="https://instagram.com/yourinstagram"
+            href="https://www.instagram.com/octpuscity?igsh=NWkyNzFoMG52azQ2"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-3 px-8 py-4 rounded-xl bg-[#172855] text-white font-display text-base font-bold tracking-wider transition-all duration-300 backdrop-blur-md border border-white/5 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-10px_rgba(225,48,108,0.3)] hover:border-pink-500/30 active:scale-95"
