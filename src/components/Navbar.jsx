@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const navLinks = [
   { label: "ADVERTISING", href: "/#advertising" },
   { label: "GAME LINKS", href: "/#games", hasDropdown: false },
-  { label: "SUCCESS STORIES", href: "/stories" },
+  { label: "DISTRIBUTOR", href: "/stories" },
   { label: "FAQ", href: "/faq" },
 ];
 

@@ -65,27 +65,27 @@ const GameLinksSection = () => {
             <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 max-w-7xl mx-auto">
             {games.map((game) => (
               <a
                 key={game._id}
                 href={game.link}
                 className="group flex flex-col items-center"
               >
-                <div className="w-full aspect-square rounded-[32px] overflow-hidden border border-white/10 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-primary/20 relative">
+                <div className="w-full aspect-square rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-primary/20 relative">
                   <img
                     src={game.image}
                     alt={game.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
-                    <span className="text-white font-display text-[10px] tracking-[0.3em] font-black uppercase">Play Now</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-4">
+                    <span className="text-white font-display text-[8px] tracking-[0.2em] font-black uppercase">Play Now</span>
                   </div>
                 </div>
-                <span className="mt-5 font-display text-sm sm:text-base font-bold text-white/90 tracking-wide transition-colors group-hover:text-white relative">
+                <span className="mt-3 font-display text-xs sm:text-sm font-bold text-white/90 tracking-wide transition-colors group-hover:text-white relative px-1 line-clamp-1">
                   {game.name}
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary/50 group-hover:w-full transition-all duration-300" />
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-px bg-primary/50 group-hover:w-full transition-all duration-300" />
                 </span>
               </a>
             ))}

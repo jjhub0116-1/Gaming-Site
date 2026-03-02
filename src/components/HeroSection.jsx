@@ -22,14 +22,13 @@ const HeroSection = () => {
         style={{ marginTop: "70px" }}
       >
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white glow-text mb-6 text-center w-full">
-          ADVERTISE WHERE
+         Available 60+ Games 
           <br />
-          THE WORLD PLAYS
+        The One-Stop Network
         </h1>
 
         <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 font-body font-medium">
-          Break through to some of the most passionate audiences of players
-          with RealmAds — the ultimate gaming advertisement platform.
+Access player download links, agent Links, and distributor connections all in one trusted and fully connected platform.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
