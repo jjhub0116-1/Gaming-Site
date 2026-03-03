@@ -15,7 +15,7 @@ const GameLinksSection = () => {
       setLoading(true);
       try {
         const type = activeTab === 0 ? "player" : "agent";
-        const response = await fetch(`http://localhost:5000/api/games?type=${type}`);
+        const response = await fetch(`/api/games?type=${type}`);
         const data = await response.json();
         setGames(data);
       } catch (err) {
