@@ -1,6 +1,7 @@
 services:
   - type: web
     name: gaming-site
+    plan: free
     env: node
     buildCommand: npm install && npm run build
     startCommand: node backend/server.js
