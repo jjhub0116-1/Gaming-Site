@@ -1,4 +1,6 @@
 import { ArrowRight, MessageSquare, Trophy, Heart } from "lucide-react";
+import communityCharacters from "@/assets/community-characters.png";
+
 
 const CommunitySection = () => {
     return (
@@ -16,10 +18,11 @@ const CommunitySection = () => {
                     <div className="relative order-2 lg:order-1 flex justify-center lg:justify-start">
                         <div className="relative w-full max-w-xl aspect-[4/3] rounded-[48px] overflow-hidden border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-700">
                             <img
-                                src="/src/assets/community-characters.png"
+                                src={communityCharacters}
                                 alt="Community Characters"
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                             />
+
                             {/* Overlay Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-transparent" />
 

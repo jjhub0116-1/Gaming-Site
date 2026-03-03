@@ -1,4 +1,7 @@
 import Navbar from "@/components/Navbar";
+import industriesShield from "@/assets/industries-shield.png";
+import industriesController from "@/assets/industries-controller.png";
+
 
 const SuccessStories = () => {
     return (
@@ -18,19 +21,21 @@ const SuccessStories = () => {
                 {/* Floating Illustration - Left */}
                 <div className="absolute left-[2%] sm:left-[5%] lg:left-[10%] top-[15%] sm:top-1/2 sm:-translate-y-1/2 w-24 h-24 sm:w-48 sm:h-48 lg:w-72 lg:h-72 animate-float pointer-events-none opacity-40 sm:opacity-100">
                     <img
-                        src="/src/assets/industries-shield.png"
+                        src={industriesShield}
                         alt="Support Asset"
                         className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(139,92,246,0.3)] rotate-[-15deg]"
                     />
+
                 </div>
 
                 {/* Floating Illustration - Right */}
                 <div className="absolute right-[2%] sm:right-[5%] lg:right-[10%] bottom-[15%] sm:top-1/2 sm:-translate-y-1/2 w-24 h-24 sm:w-48 sm:h-48 lg:w-72 lg:h-72 animate-float-delayed pointer-events-none opacity-40 sm:opacity-100">
                     <img
-                        src="/src/assets/industries-controller.png"
+                        src={industriesController}
                         alt="Gaming Asset"
-                        className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(99,102,241,0.3)] rotate-[15deg]"
+                        className="w-full h-full object-contain drop-shadow-[0_0_20_rgba(99,102,241,0.3)] rotate-[15deg]"
                     />
+
                 </div>
 
                 {/* Content */}

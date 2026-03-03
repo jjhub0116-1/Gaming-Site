@@ -40,7 +40,7 @@ mongoose.connect(MONGODB_URI)
     .catch(err => console.error('Could not connect to MongoDB', err));
 
 // Catch-all route to serve index.html for SPA
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
