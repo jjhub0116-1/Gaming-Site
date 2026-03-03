@@ -18,6 +18,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// TEST ROUTE - DEFINITIVELY CHECKS DEPLOYMENT
+app.get('/api/test-deploy', (req, res) => {
+    res.json({ message: "DEPLOYMENT ACTIVE", timestamp: new Date() });
+});
+
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, '../dist')));
 
