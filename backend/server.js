@@ -10,7 +10,6 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 dotenv.config();
 
 const app = express();
@@ -18,8 +17,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../dist')));
 
+// Serve static files from the dist directory
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Routes
 app.get('/api/games', async (req, res) => {
@@ -33,6 +33,7 @@ app.get('/api/games', async (req, res) => {
     }
 });
 
+// Diagnostic route
 app.get('/api/debug-images', (req, res) => {
     const imagesDir = path.join(__dirname, '../dist/game-images');
     try {
@@ -42,7 +43,7 @@ app.get('/api/debug-images', (req, res) => {
                 exists: true, 
                 path: imagesDir, 
                 filesCount: files.length,
-                files: files.slice(0, 20)
+                files: files.slice(0, 50) 
             });
         } else {
             const distDir = path.join(__dirname, '../dist');
@@ -66,11 +67,11 @@ mongoose.connect(MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err));
 
-// Catch-all route to serve index.html for SPA
-app.get(/.*/, (req, res) => {
+// Catch-all route for SPA - MUST BE LAST and should not match API or static files
+// We use a negative lookahead to exclude assets, game-images, and api
+app.get(/^(?!\/assets|\/game-images|\/api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
