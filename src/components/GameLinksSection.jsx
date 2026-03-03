@@ -70,6 +70,8 @@ const GameLinksSection = () => {
               <a
                 key={game._id}
                 href={game.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex flex-col items-center"
               >
                 <div className="w-full aspect-square rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-primary/20 relative">
