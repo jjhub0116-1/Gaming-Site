@@ -18,15 +18,24 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// TEST ROUTE - DEFINITIVELY CHECKS DEPLOYMENT
-app.get('/api/test-deploy', (req, res) => {
-    res.json({ message: "DEPLOYMENT ACTIVE", timestamp: new Date() });
+// 1. DIAGNOSTIC ROUTE - CHECK DEPLOYMENT
+app.get('/api/test-deploy-final', (req, res) => {
+    res.json({ 
+        message: "DEPLOYMENT ACTIVE", 
+        timestamp: new Date(),
+        cwd: process.cwd(),
+        dirname: __dirname
+    });
 });
 
-// Serve static files from the dist directory
+// 2. EXPLICIT IMAGE SERVING
+app.use('/game-images', express.static(path.join(__dirname, '../dist/game-images')));
+app.use('/assets', express.static(path.join(__dirname, '../dist/assets')));
+
+// 3. FALLBACK STATIC SERVING (for favicon etc)
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Routes
+// 4. API ROUTES
 app.get('/api/games', async (req, res) => {
     try {
         const { type } = req.query;
@@ -38,28 +47,18 @@ app.get('/api/games', async (req, res) => {
     }
 });
 
-// Diagnostic route
-app.get('/api/debug-images', (req, res) => {
+// 5. DIAGNOSTIC IMAGES
+app.get('/api/debug-images-final', (req, res) => {
     const imagesDir = path.join(__dirname, '../dist/game-images');
     try {
-        if (fs.existsSync(imagesDir)) {
-            const files = fs.readdirSync(imagesDir);
-            res.json({ 
-                exists: true, 
-                path: imagesDir, 
-                filesCount: files.length,
-                files: files.slice(0, 50) 
-            });
-        } else {
-            const distDir = path.join(__dirname, '../dist');
-            const distExists = fs.existsSync(distDir);
-            res.json({ 
-                exists: false, 
-                path: imagesDir,
-                distExists,
-                distFiles: distExists ? fs.readdirSync(distDir) : []
-            });
-        }
+        const distExists = fs.existsSync(path.join(__dirname, '../dist'));
+        const imagesExists = fs.existsSync(imagesDir);
+        res.json({
+            distExists,
+            imagesExists,
+            imagesPath: imagesDir,
+            files: imagesExists ? fs.readdirSync(imagesDir).slice(0, 30) : []
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -67,14 +66,16 @@ app.get('/api/debug-images', (req, res) => {
 
 // Connect to MongoDB
 const MONGODB_URI = process.env.MONGODB_URI;
-
 mongoose.connect(MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err));
 
-// Catch-all route for SPA - MUST BE LAST and should not match API or static files
-// We use a negative lookahead to exclude assets, game-images, and api
-app.get(/^(?!\/assets|\/game-images|\/api).*/, (req, res) => {
+// 6. CATCH-ALL FOR SPA
+app.get('*', (req, res) => {
+    // If it's a request for a non-existent file in our protected folders, 404 it instead of index.html
+    if (req.path.startsWith('/api') || req.path.startsWith('/game-images') || req.path.startsWith('/assets')) {
+        return res.status(404).send('Not Found');
+    }
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
