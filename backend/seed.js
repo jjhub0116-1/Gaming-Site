@@ -12,8 +12,32 @@ dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// Image mapping is disabled because the sanishtech.com links are currently returning 404
-const newImageMapping = {};
+const newImageMapping = {
+  "river monster": "/game-images/river-monster.jpg",
+  "blue dragon": "/game-images/blue-dragon.jpg",
+  "cash frenzy": "/game-images/cash-frenzy.jpg",
+  "cash machine": "/game-images/cash-machine.jpg",
+  "moolah": "/game-images/moolah.jpg",
+  "egame": "/game-images/egame.jpg",
+  "acebook": "/game-images/acebook.webp",
+  "yolo": "/game-images/yolo.jpg",
+  "juwa 2.0": "/game-images/juwa-2-0.png",
+  "las vegas sweeps": "/game-images/las-vegas.jpg",
+  "highstakes": "/game-images/high-stakes.jpg",
+  "high roller": "/game-images/high-roller.jpg",
+  "billionballs": "/game-images/billion-balls.png",
+  "vegas x": "/game-images/vegas-x.jpg",
+  "river sweeps": "/game-images/river-sweeps.jpg",
+  "milky": "/game-images/milkyway.jpg",
+  "game room": "/game-images/gameroom.webp",
+  "vb link": "/game-images/vblink.png",
+  "panda master": "/game-images/panda-master.png",
+  "ultrapanda": "/game-images/ultra-panda.jpg",
+  "juwa": "/game-images/juwa.png",
+  "fire": "/game-images/fire-kirin.png",
+  "game vault": "/game-images/game-vault.png",
+  "mafia": "/game-images/mafia.webp"
+};
 
 const requestedGamesOrdered = [
   { name: "gamevault", jsonName: "game vault" },
