@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import Game from './models/Game.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,6 +30,32 @@ app.get('/api/games', async (req, res) => {
         res.json(games);
     } catch (err) {
         res.status(500).json({ message: err.message });
+    }
+});
+
+app.get('/api/debug-images', (req, res) => {
+    const imagesDir = path.join(__dirname, '../dist/game-images');
+    try {
+        if (fs.existsSync(imagesDir)) {
+            const files = fs.readdirSync(imagesDir);
+            res.json({ 
+                exists: true, 
+                path: imagesDir, 
+                filesCount: files.length,
+                files: files.slice(0, 20)
+            });
+        } else {
+            const distDir = path.join(__dirname, '../dist');
+            const distExists = fs.existsSync(distDir);
+            res.json({ 
+                exists: false, 
+                path: imagesDir,
+                distExists,
+                distFiles: distExists ? fs.readdirSync(distDir) : []
+            });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
 
