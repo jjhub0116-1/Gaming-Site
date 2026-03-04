@@ -71,7 +71,7 @@ mongoose.connect(MONGODB_URI)
     .catch(err => console.error('Could not connect to MongoDB', err));
 
 // 6. CATCH-ALL FOR SPA
-app.get('*', (req, res) => {
+app.get('*splat', (req, res) => {
     // If it's a request for a non-existent file in our protected folders, 404 it instead of index.html
     if (req.path.startsWith('/api') || req.path.startsWith('/game-images') || req.path.startsWith('/assets')) {
         return res.status(404).send('Not Found');
